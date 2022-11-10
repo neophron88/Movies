@@ -1,0 +1,15 @@
+plugins {
+    id 'com.android.application'
+    id 'base-android-library'
+}
+
+android {
+
+    defaultConfig {
+        applicationId "com.rasulov.movies"
+
+        versionCode 1
+        versionName "1.0"
+
+    }
+}
