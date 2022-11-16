@@ -1,3 +1,7 @@
 plugins{
-    id 'extended-android-library'
+    id 'feature-android-library'
+}
+
+dependencies {
+    implementation project(':core:feature')
 }

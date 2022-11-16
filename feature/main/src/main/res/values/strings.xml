@@ -1,0 +1,10 @@
+<resources>
+
+    <string-array name="sort_by">
+        <item>Popularity</item>
+        <item>Release date</item>
+        <item>Revenue</item>
+        <item>Rating</item>
+    </string-array>
+
+</resources>

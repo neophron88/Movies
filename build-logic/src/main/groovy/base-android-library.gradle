@@ -1,3 +1,4 @@
+
 plugins {
     id 'org.jetbrains.kotlin.android'
 }
@@ -26,17 +27,12 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures {
-        viewBinding true
+    dependencies {
+        implementation libs.androidx.core.ktx
+        implementation libs.androidx.appcompat
+        implementation libs.android.material
+        testImplementation libs.junit.core
+        androidTestImplementation libs.junit.test
+        androidTestImplementation libs.espresso.test
     }
-}
-
-dependencies {
-    implementation libs.androidx.core.ktx
-    implementation libs.androidx.appcompat
-    implementation libs.android.material
-    implementation libs.androidx.constraintlayout
-    testImplementation libs.junit.core
-    androidTestImplementation libs.junit.test
-    androidTestImplementation libs.espresso.test
 }

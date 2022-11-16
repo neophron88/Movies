@@ -13,3 +13,9 @@ android {
 
     }
 }
+
+dependencies {
+    implementation project(':core:theme')
+
+}
+

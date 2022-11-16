@@ -9,6 +9,10 @@ constraintlayoutVersion = "2.1.4"
 junitVersion = "4.13.2"
 testJunitVersion = "1.1.3"
 testEspressoVersion = "3.4.0"
+fragmentKtxVersion = "1.5.4"
+recyclerviewVersion = "1.2.1"
+coroutinesVersion = "1.3.9"
+lifecycleRuntimeVersion = "2.5.1"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
@@ -18,6 +22,11 @@ androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayo
 junit-core = { module = "junit:junit", version.ref = "junitVersion" }
 junit-test = { module = "androidx.test.ext:junit", version.ref = "testJunitVersion" }
 espresso-test = { module = "androidx.test.espresso:espresso-core", version.ref = "testEspressoVersion" }
+fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtxVersion" }
+recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerviewVersion" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
+lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeVersion" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android" }

@@ -1,0 +1,4 @@
+plugins {
+    id 'extended-android-library'
+}
+
