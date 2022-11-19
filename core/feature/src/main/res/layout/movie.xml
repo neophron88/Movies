@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -11,8 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:src="@drawable/test_image"
-        app:shapeAppearanceOverlay="@style/ImageRoundedSquare" />
+        android:maxWidth="250dp"
+        app:shapeAppearanceOverlay="@style/ImageRoundedSquare"
+        tools:src="@drawable/test_image" />
 
 
     <TextView
@@ -23,14 +25,14 @@
         android:ellipsize="end"
         android:fontFamily="@font/impact"
         android:maxLines="1"
-        android:text="Avengers"
         android:textSize="20sp"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        tools:text="Avengers" />
 
 
     <LinearLayout
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
@@ -38,27 +40,28 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/rate_icon"
             android:src="@drawable/ic_rate" />
 
         <TextView
-            android:id="@+id/rate"
+            android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="3dp"
             android:fontFamily="@font/impact"
-            android:text="7.9"
             android:textColor="@color/yellow"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="7.9" />
 
         <TextView
             android:id="@+id/release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="7dp"
             android:fontFamily="@font/impact"
-            android:text="2024-07-19"
             android:textColor="@color/purple_500"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="2024-07-19" />
 
     </LinearLayout>
 

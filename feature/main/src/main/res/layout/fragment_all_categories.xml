@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.all_genres.AllGenresFragment">
+    tools:context=".presentation.all_categories.AllCategoriesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_all_genres"
+        android:id="@+id/list_all_categories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

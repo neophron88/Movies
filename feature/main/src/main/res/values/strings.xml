@@ -7,4 +7,5 @@
         <item>Rating</item>
     </string-array>
 
+    <string name="more_movies">More movies</string>
 </resources>
