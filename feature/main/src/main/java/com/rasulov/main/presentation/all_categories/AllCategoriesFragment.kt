@@ -18,7 +18,7 @@ class AllCategoriesFragment : Fragment(R.layout.fragment_all_categories) {
 
     internal val binding: FragmentAllCategoriesBinding by viewBindings()
     internal val viewModel: AllCategoriesViewModel by viewModels()
-    internal val viewPool = RecyclerView.RecycledViewPool()
+    internal val viewPool: RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,11 +26,11 @@ class AllCategoriesFragment : Fragment(R.layout.fragment_all_categories) {
 
         val adapter = setupAdapter()
         setupList(adapter)
-        observeAllGenres(adapter)
+        observeAllCategories(adapter)
 
     }
 
-    private fun observeAllGenres(adapter: ItemsAdapter) =
+    private fun observeAllCategories(adapter: ItemsAdapter) =
         repeatWhenViewStarted {
             viewModel.allCategoriesFlow.collectLatest {
                 adapter.submitList(it)

@@ -1,4 +1,4 @@
-package com.rasulov.feature.presentation.shared.movie_delegate
+package com.rasulov.feature.presentation.shared.viewholder
 
 import android.view.View
 import com.rasulov.feature.R

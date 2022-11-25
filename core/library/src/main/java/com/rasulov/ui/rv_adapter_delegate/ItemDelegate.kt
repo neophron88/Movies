@@ -7,7 +7,7 @@ import kotlin.reflect.KClass
 
 typealias ItemViewHolderProducer<I> = (view: View) -> ItemViewHolder<I>
 
-class ItemDelegate<I : Any>(
+class ItemDelegate<I : Any> @Deprecated("") constructor(
     val itemClass: KClass<I>,
     @LayoutRes val layout: Int,
     val diffUtil: DiffUtil.ItemCallback<I>,

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="sort_by">
+        <item>Популярные</item>
+        <item>Дата релиза</item>
+        <item>Доход</item>
+        <item>Рейтинг</item>
+    </string-array>
+
+    <string name="top_rated">Популярные</string>
+    <string name="more_movies">Больше фильмов</string>
+    <string name="recently">Недавние</string>
+
+
+</resources>

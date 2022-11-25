@@ -27,11 +27,13 @@ open class ItemsAdapter(
 
     override fun onViewRecycled(holder: ItemViewHolder<Any>) {
         holder.unBind()
+
     }
 
     override fun getItemViewType(position: Int): Int {
         return mediator.getItemViewType(getItem(position))
     }
+
 
 }
 

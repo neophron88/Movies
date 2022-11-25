@@ -13,6 +13,11 @@ fragmentKtxVersion = "1.5.4"
 recyclerviewVersion = "1.2.1"
 coroutinesVersion = "1.3.9"
 lifecycleRuntimeVersion = "2.5.1"
+pagingVersion = "3.1.1"
+viewbindingVersion = "7.2.1"
+retrofitVersion = "2.9.0"
+okhttpVersion = "4.10.0"
+gsonVersion = "2.10"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
@@ -24,8 +29,16 @@ junit-test = { module = "androidx.test.ext:junit", version.ref = "testJunitVersi
 espresso-test = { module = "androidx.test.espresso:espresso-core", version.ref = "testEspressoVersion" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtxVersion" }
 recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerviewVersion" }
-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
 lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeVersion" }
+paging-library = { module = "androidx.paging:paging-runtime", version.ref = "pagingVersion" }
+viewBinding = { module = "androidx.databinding:viewbinding", version.ref = "viewbindingVersion" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
+
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
+moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofitVersion" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttpVersion" }
+okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttpVersion" }
 
 
 [plugins]

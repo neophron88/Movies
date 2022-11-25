@@ -1,12 +1,13 @@
 package com.rasulov.main.presentation.all_categories.setup
 
+import android.os.Handler
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rasulov.feature.R.*
 import com.rasulov.feature.domain.shared.Movie
-import com.rasulov.feature.presentation.shared.movie_delegate.MovieViewHolder
+import com.rasulov.feature.presentation.shared.viewholder.MovieViewHolder
 import com.rasulov.main.R
 import com.rasulov.main.domain.entities.Genre
+import com.rasulov.main.domain.entities.Recently
 import com.rasulov.main.domain.entities.TopRated
 import com.rasulov.main.presentation.all_categories.AllCategoriesFragment
 import com.rasulov.main.presentation.all_categories.viewholder.GenreViewHolder
@@ -19,28 +20,25 @@ import com.rasulov.ui.rv_adapter_delegate.ItemsAdapter
 internal fun AllCategoriesFragment.setupAdapter(): ItemsAdapter {
 
     val genreDelegate = ItemDelegate(
-        itemClass = Genre::class,
         layout = R.layout.genre_item,
         diffUtil = ItemDiffUtil(itemsTheSamePointer = Genre::id),
         itemViewHolderProducer = { createGenreViewHolder(it) },
     )
 
     val topRatedDelegate = ItemDelegate(
-        itemClass = TopRated::class,
         layout = R.layout.top_rated_item,
         diffUtil = ItemDiffUtil(itemsTheSamePointer = TopRated::title),
         itemViewHolderProducer = { TODO() },
     )
 
-    val recentlyWatchedDelegate = ItemDelegate(
-        itemClass = Genre::class,
+    val recentlyDelegate = ItemDelegate(
         layout = R.layout.genre_item,
-        diffUtil = ItemDiffUtil(itemsTheSamePointer = Genre::id),
-        itemViewHolderProducer = { createGenreViewHolder(it) },
+        diffUtil = ItemDiffUtil(itemsTheSamePointer = Recently::title),
+        itemViewHolderProducer = { TODO() },
     )
 
 
-    return ItemsAdapter(genreDelegate, topRatedDelegate, recentlyWatchedDelegate)
+    return ItemsAdapter(genreDelegate, topRatedDelegate, recentlyDelegate)
 }
 
 
@@ -60,8 +58,7 @@ private fun AllCategoriesFragment.createGenreViewHolder(view: View) = GenreViewH
 
 
 private fun AllCategoriesFragment.createMovieItemDelegate() = ItemDelegate(
-    itemClass = Movie::class,
-    layout = layout.movie,
+    layout = com.rasulov.feature.R.layout.movie,
     diffUtil = ItemDiffUtil(itemsTheSamePointer = Movie::id),
     itemViewHolderProducer = { view ->
         val posterWidth = 150.dp(requireContext())

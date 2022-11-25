@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
@@ -18,17 +19,17 @@
             android:ellipsize="end"
             android:fontFamily="@font/impact"
             android:maxLines="2"
-            android:text="Family"
             android:textSize="20sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            tools:text="Family" />
 
         <ImageView
             android:id="@+id/more_pointer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:src="@drawable/ic_pointer_more"
-            android:contentDescription="@string/more_movies" />
+            android:contentDescription="@string/more_movies"
+            android:src="@drawable/ic_pointer_more" />
 
     </FrameLayout>
 
@@ -36,6 +37,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_genre"
         android:layout_width="match_parent"
+        tools:listitem="@layout/movie"
         android:layout_height="wrap_content"
         android:clipToPadding="false" />
 
