@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation libs.lifecycle.runtime
     compileOnly libs.viewBinding
+    implementation libs.lifecycle.runtime
     implementation libs.recyclerview
 }

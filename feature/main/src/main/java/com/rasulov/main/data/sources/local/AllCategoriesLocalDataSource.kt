@@ -1,10 +1,9 @@
 package com.rasulov.main.data.sources.local
 
-import com.rasulov.feature.domain.shared.Movie
+import com.rasulov.shared.domain.models.Movie
 import com.rasulov.main.domain.entities.Genre
 import com.rasulov.main.domain.queries.GenreChanged
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
 
 interface AllCategoriesLocalDataSource {
 

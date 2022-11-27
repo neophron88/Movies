@@ -1,10 +1,9 @@
 package com.rasulov.main.presentation.all_categories.setup
 
-import android.os.Handler
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rasulov.feature.domain.shared.Movie
-import com.rasulov.feature.presentation.shared.viewholder.MovieViewHolder
+import com.rasulov.shared.domain.models.Movie
+import com.rasulov.shared.presentation.viewholder.MovieViewHolder
 import com.rasulov.main.R
 import com.rasulov.main.domain.entities.Genre
 import com.rasulov.main.domain.entities.Recently
@@ -58,7 +57,7 @@ private fun AllCategoriesFragment.createGenreViewHolder(view: View) = GenreViewH
 
 
 private fun AllCategoriesFragment.createMovieItemDelegate() = ItemDelegate(
-    layout = com.rasulov.feature.R.layout.movie,
+    layout = com.rasulov.shared.R.layout.movie,
     diffUtil = ItemDiffUtil(itemsTheSamePointer = Movie::id),
     itemViewHolderProducer = { view ->
         val posterWidth = 150.dp(requireContext())

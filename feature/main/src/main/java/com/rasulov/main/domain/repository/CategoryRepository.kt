@@ -1,7 +1,7 @@
 package com.rasulov.main.domain.repository
 
 import androidx.paging.PagingSource
-import com.rasulov.feature.domain.shared.Movie
+import com.rasulov.shared.domain.models.Movie
 import com.rasulov.main.domain.entities.Genre
 
 interface CategoryRepository {

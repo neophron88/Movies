@@ -1,16 +1,16 @@
 package com.rasulov.main.data.sources.remote
 
-import com.rasulov.feature.domain.shared.Movie
-import com.rasulov.main.domain.entities.Genre
-import com.rasulov.main.domain.queries.GenreChanged
-import kotlinx.coroutines.flow.Flow
+import com.rasulov.main.data.sources.remote.retrofit_impl.service.models.BaseParams
+import com.rasulov.main.data.sources.remote.retrofit_impl.service.models.ByGenreParams
+import com.rasulov.main.data.sources.remote.retrofit_impl.service.models.RemoteGenre
+import com.rasulov.shared.data.remote.models.RemoteMovie
 
 interface AllCategoriesRemoteDataSource {
 
-    suspend fun loadGenresIfCurrentOutdated(): List<Genre>
+    suspend fun loadAllGenres(params: BaseParams): List<RemoteGenre>
 
-    suspend fun loadMoviesByGenreIfCurrentOutdated(genre: Genre): List<Movie>
+    suspend fun loadMoviesByGenre(params: ByGenreParams): List<RemoteMovie>
 
-    suspend fun loadTopRatedMoviesIfCurrentOutdated(): List<Movie>
+    suspend fun loadTopRatedMovies(params: BaseParams): List<RemoteMovie>
 
 }

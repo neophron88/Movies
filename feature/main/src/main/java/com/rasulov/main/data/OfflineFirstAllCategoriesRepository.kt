@@ -1,6 +1,6 @@
 package com.rasulov.main.data
 
-import com.rasulov.feature.domain.shared.Movie
+import com.rasulov.shared.domain.models.Movie
 import com.rasulov.main.data.sources.local.AllCategoriesLocalDataSource
 import com.rasulov.main.data.sources.remote.AllCategoriesRemoteDataSource
 import com.rasulov.main.data.util.offlineFirst
@@ -21,7 +21,7 @@ class OfflineFirstAllCategoriesRepository(
     override fun getGenresFlow(): Flow<List<Genre>> =
         offlineFirst(
             localDataFlow = { local.getGenresFlow() },
-            syncWithRemote = { remote.loadGenresIfCurrentOutdated() },
+            syncWithRemote = { remote.loadAllGenres() },
             updateLocalData = { local.updateGenres(it) }
         )
 
@@ -33,7 +33,7 @@ class OfflineFirstAllCategoriesRepository(
     override suspend fun loadMoviesByGenre(genre: Genre): Flow<List<Movie>> =
         offlineFirst(
             localDataFlow = { local.getMoviesByGenreFlow(genre) },
-            syncWithRemote = { remote.loadMoviesByGenreIfCurrentOutdated(genre) },
+            syncWithRemote = { remote.loadMoviesByGenre(genre) },
             updateLocalData = { local.updateMoviesByGenre(it, genre) }
         )
 
@@ -41,7 +41,7 @@ class OfflineFirstAllCategoriesRepository(
     override suspend fun loadTopRatedMovies(): Flow<List<Movie>> =
         offlineFirst(
             localDataFlow = { local.getTopRatedMoviesFlow() },
-            syncWithRemote = { remote.loadTopRatedMoviesIfCurrentOutdated() },
+            syncWithRemote = { remote.loadTopRatedMovies() },
             updateLocalData = { local.updateTopRatedMovies(it) }
         )
 

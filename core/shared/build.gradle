@@ -1,0 +1,15 @@
+plugins {
+    id 'extended-android-library'
+}
+
+android {
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(":core:library")
+    implementation project(':core:theme')
+    compileOnly libs.moshi
+}

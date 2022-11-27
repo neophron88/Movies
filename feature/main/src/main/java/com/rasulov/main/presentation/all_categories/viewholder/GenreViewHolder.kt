@@ -2,7 +2,7 @@ package com.rasulov.main.presentation.all_categories.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.rasulov.feature.domain.shared.Movie
+import com.rasulov.shared.domain.models.Movie
 import com.rasulov.main.databinding.GenreItemBinding
 import com.rasulov.main.domain.entities.Genre
 import com.rasulov.main.domain.enums.SortBy

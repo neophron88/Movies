@@ -3,6 +3,6 @@ plugins{
 }
 
 dependencies {
-    implementation project(':core:feature')
+    implementation project(':core:shared')
     implementation libs.gson
 }

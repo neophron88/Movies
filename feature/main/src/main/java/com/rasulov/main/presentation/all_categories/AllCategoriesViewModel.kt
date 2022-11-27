@@ -2,8 +2,8 @@ package com.rasulov.main.presentation.all_categories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rasulov.feature.domain.shared.Movie
-import com.rasulov.feature.presentation.shared.util.StringResource
+import com.rasulov.shared.domain.models.Movie
+import com.rasulov.shared.presentation.util.StringResource
 import com.rasulov.main.R
 import com.rasulov.main.domain.entities.Category
 import com.rasulov.main.domain.entities.Genre

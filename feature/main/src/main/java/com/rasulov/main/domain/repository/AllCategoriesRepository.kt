@@ -1,6 +1,6 @@
 package com.rasulov.main.domain.repository
 
-import com.rasulov.feature.domain.shared.Movie
+import com.rasulov.shared.domain.models.Movie
 import com.rasulov.main.domain.entities.Genre
 import com.rasulov.main.domain.queries.GenreChanged
 import kotlinx.coroutines.flow.Flow
