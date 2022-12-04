@@ -2,54 +2,63 @@ package com.rasulov.main.presentation.all_categories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rasulov.shared.domain.models.Movie
-import com.rasulov.shared.presentation.util.StringResource
+import com.rasulov.common.CurrentLanguage
+import com.rasulov.common.StringResource
+import com.rasulov.feature.domain.base.Resource
+import com.rasulov.feature.domain.base.Success
+import com.rasulov.feature.domain.base.enums.Language
+import com.rasulov.feature.domain.base.map
+import com.rasulov.feature.domain.base.queries.BaseQuery
+import com.rasulov.feature.domain.shared.models.Movie
+import com.rasulov.feature.presentation.shared.asLanguage
 import com.rasulov.main.R
-import com.rasulov.main.domain.entities.Category
-import com.rasulov.main.domain.entities.Genre
-import com.rasulov.main.domain.entities.Recently
-import com.rasulov.main.domain.entities.TopRated
-import com.rasulov.main.domain.queries.GenreChanged
+import com.rasulov.main.domain.enums.SortBy
+import com.rasulov.main.domain.models.Category
+import com.rasulov.main.domain.models.Genre
+import com.rasulov.main.domain.models.Recently
+import com.rasulov.main.domain.queries.GenreChangedQuery
+import com.rasulov.main.domain.queries.MoviesByGenreQuery
 import com.rasulov.main.domain.repository.AllCategoriesRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.shareIn
 
 class AllCategoriesViewModel(
     private val stringRes: StringResource,
+    private val language: CurrentLanguage,
     private val repository: AllCategoriesRepository
 ) : ViewModel() {
 
 
     val allCategoriesFlow = repository
-        .getGenresFlow()
-        .map { convertToCategoryList(it) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
+        .getGenresFlow(BaseQuery(Language.EN))
+        .map { mapToCategoryList(it) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
-    suspend fun loadMoviesByGenre(genre: Genre): List<Movie> {
-        TODO()
-    }
+    fun loadMoviesByGenre(genre: Genre): Flow<Resource<List<Movie>>> =
+        repository.loadMoviesByGenre(
+            MoviesByGenreQuery(language.asLanguage(), genre.id, genre.sortBy)
+        )
 
-    fun changeGenreSortBy(genre: GenreChanged) {
-        TODO("Not yet implemented")
-    }
 
-    suspend fun loadTopRatedMovies(): List<Movie> {
-        TODO()
-    }
+    suspend fun changeGenreSortBy(genreId: Int, sortBy: SortBy) =
+        repository.setGenreSettings(
+            GenreChangedQuery(genreId, sortBy)
+        )
 
-    suspend fun loadRecentlyMovies(): List<Movie> {
-        TODO()
-    }
 
-    private fun convertToCategoryList(genres: List<Genre>): List<Category> {
-        return mutableListOf<Category>().apply {
-            add(TopRated(stringRes.getString(R.string.top_rated)))
-            add(Recently(stringRes.getString(R.string.recently)))
-            addAll(genres)
+    fun loadRecentlyMovies(): Flow<Resource<List<Movie>>> =
+        repository.loadRecentlyMovies()
+
+
+    private fun mapToCategoryList(resource: Resource<List<Genre>>) =
+        resource.map {
+            mutableListOf<Category>().apply {
+                add(Recently(stringRes.getString(R.string.recently)))
+                addAll(it)
+            }.toList()
         }
-
-    }
 
 }

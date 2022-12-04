@@ -1,4 +1,5 @@
 @file:Suppress("UNCHECKED_CAST", "unused")
+
 package com.rasulov.ui.viewbinding_delegate
 
 import android.view.View
@@ -18,8 +19,8 @@ import kotlin.reflect.KProperty
  * When using this delegate make sure the Fragment is inherited from
  * Fragment(@LayoutRes int contentLayoutId) with providing your layout in constructor or
  * create as usual in onCreateView method in order to viewBinding's delegate will be able
- * to bind to the view on its own. 
- * 
+ * to bind to the view on its own.
+ *
  * Note that accessing viewBinding while fragment's view is
  * destroyed or not created will throw IllegalStateException.
  **/
@@ -36,25 +37,29 @@ class LazyFragmentsViewBinding<VB : ViewBinding>(
     private var binding: VB? = null
 
 
+    private val error = IllegalStateException(
+        "Don't access viewBinding before onViewCreated() or after onDestroyView() inclusive"
+    )
+
+    private val observer = object : DefaultLifecycleObserver {
+        override fun onDestroy(owner: LifecycleOwner) {
+            binding = null
+        }
+    }
+
+
     override operator fun getValue(
         thisRef: Fragment,
         property: KProperty<*>
     ): VB = binding ?: tryToBind(thisRef)
 
-
     private fun tryToBind(fragment: Fragment): VB {
-
-        val error = IllegalStateException(
-            "Don't access viewBinding before onViewCreated() or after onDestroyView() inclusive"
-        )
 
         val view = fragment.view ?: throw error
         val lifecycle = fragment.viewLifecycleOwner.lifecycle
         if (lifecycle.currentState == Lifecycle.State.DESTROYED) throw error
 
-        lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onDestroy(owner: LifecycleOwner) { binding = null }
-        })
+        lifecycle.addObserver(observer)
 
         val bindMethod = VBClazz.getMethod("bind", View::class.java)
         val newBinding = bindMethod.invoke(null, view) as VB

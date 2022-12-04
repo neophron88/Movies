@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rate_icon">Иконка рейтинга</string>
+
+    <string name="no_connection">Нет соединения</string>
+    <string name="backend_fault">Сервер не отвечает</string>
+    <string name="unknown_conn_error">Неизвестная ошибка</string>
+    <string name="refresh">Обновить</string>
+
+</resources>

@@ -1,0 +1,19 @@
+plugins {
+    id 'extended-android-library'
+}
+
+android {
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(':core:theme')
+    implementation project(':core:common')
+    implementation project(':core:library')
+    implementation project(':core:network')
+    implementation libs.recyclerview
+
+
+}

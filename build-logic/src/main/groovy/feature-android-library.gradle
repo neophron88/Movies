@@ -10,7 +10,11 @@ android {
 
 dependencies {
     implementation project(':core:theme')
-    implementation project(":core:library")
+    implementation project(':core:library')
+    implementation project(':core:common')
+    implementation project(':core:network')
+    implementation project(':core:database')
+    implementation project(':core:feature')
 
 
     implementation libs.androidx.constraintlayout
@@ -19,7 +23,5 @@ dependencies {
     implementation libs.paging.library
     implementation libs.coroutines
 
-    implementation libs.okhttp
-    implementation libs.retrofit
-    implementation libs.moshi
+
 }

@@ -1,53 +1,70 @@
 package com.rasulov.main.data
 
-import com.rasulov.shared.domain.models.Movie
-import com.rasulov.main.data.sources.local.AllCategoriesLocalDataSource
-import com.rasulov.main.data.sources.remote.AllCategoriesRemoteDataSource
+import com.rasulov.database.all_categories_dao.AllCategoriesDao
+import com.rasulov.feature.domain.base.Resource
+import com.rasulov.feature.domain.base.queries.BaseQuery
+import com.rasulov.feature.domain.shared.models.Movie
+import com.rasulov.main.data.network_datasource.AllCategoriesNetworkDataSource
+import com.rasulov.main.data.util.mapper.*
 import com.rasulov.main.data.util.offlineFirst
-import com.rasulov.main.domain.entities.Genre
-import com.rasulov.main.domain.queries.GenreChanged
+import com.rasulov.main.domain.models.Genre
+import com.rasulov.main.domain.queries.GenreChangedQuery
+import com.rasulov.main.domain.queries.MoviesByGenreQuery
 import com.rasulov.main.domain.repository.AllCategoriesRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 
 class OfflineFirstAllCategoriesRepository(
-    private val local: AllCategoriesLocalDataSource,
-    private val remote: AllCategoriesRemoteDataSource,
+    private val local: AllCategoriesDao,
+    private val network: AllCategoriesNetworkDataSource,
+    private val longLiveScope: CoroutineScope
 ) : AllCategoriesRepository {
 
     private val mutex = Mutex()
 
-
-    override fun getGenresFlow(): Flow<List<Genre>> =
-        offlineFirst(
-            localDataFlow = { local.getGenresFlow() },
-            syncWithRemote = { remote.loadAllGenres() },
-            updateLocalData = { local.updateGenres(it) }
-        )
-
-
-    override fun changeGenreSortBy(genre: GenreChanged) {
-        local.changeGenre(genre)
+    companion object {
+        private const val alwaysFirstPage = 1
     }
 
-    override suspend fun loadMoviesByGenre(genre: Genre): Flow<List<Movie>> =
+    override fun getGenresFlow(query: BaseQuery): Flow<Resource<List<Genre>>> =
         offlineFirst(
-            localDataFlow = { local.getMoviesByGenreFlow(genre) },
-            syncWithRemote = { remote.loadMoviesByGenre(genre) },
-            updateLocalData = { local.updateMoviesByGenre(it, genre) }
+            mutex = mutex,
+            longLiveScope = longLiveScope,
+            localDataFlow = { local.getGenresFlow().map { it.toGenres() } },
+            syncWithRemote = { network.loadAllGenres(query.toBaseParams()) },
+            updateLocalData = { list ->
+                local.insertGenresAfterDeleteOld(list.toInsertGenresTuple())
+            }
         )
 
 
-    override suspend fun loadTopRatedMovies(): Flow<List<Movie>> =
+    override suspend fun setGenreSettings(query: GenreChangedQuery) {
+        local.setGenreSettings(query.toGenreSettingsEntity())
+    }
+
+
+    override fun loadMoviesByGenre(query: MoviesByGenreQuery): Flow<Resource<List<Movie>>> =
         offlineFirst(
-            localDataFlow = { local.getTopRatedMoviesFlow() },
-            syncWithRemote = { remote.loadTopRatedMovies() },
-            updateLocalData = { local.updateTopRatedMovies(it) }
+            mutex = mutex,
+            longLiveScope = longLiveScope,
+            localDataFlow = {
+                local.getMoviesByGenreFlow(query.genreId).map { it.toMovies() }
+            },
+            syncWithRemote = {
+                network.loadMoviesByGenre(query.toByGenreNetworkParams(alwaysFirstPage))
+            },
+            updateLocalData = { networkMovies ->
+                local.insertMoviesByGenreAfterDeleteOld(
+                    networkMovies.toInsertMoviesByGenreTuple(query.genreId)
+                )
+            }
         )
 
 
-    override suspend fun loadRecentlyMovies(): Flow<List<Movie>> =
-        local.getRecentlyMoviesFlow()
+    override fun loadRecentlyMovies(): Flow<Resource<List<Movie>>> =
+        TODO()
 
 
 }

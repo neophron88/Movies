@@ -1,0 +1,18 @@
+plugins {
+    id 'extended-android-library'
+    id 'kotlin-kapt'
+}
+
+android {
+    kapt {
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
+    }
+}
+
+
+dependencies {
+    implementation libs.room
+    kapt libs.room.compiler
+}

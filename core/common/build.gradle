@@ -1,0 +1,15 @@
+plugins {
+    id 'extended-android-library'
+}
+
+android {
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation libs.lifecycle.runtime
+
+}

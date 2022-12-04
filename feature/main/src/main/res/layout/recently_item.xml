@@ -21,11 +21,13 @@
         tools:text="Recently" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_recently_watched"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager_recently"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        android:clipChildren="true"
+        />
 
 
 </LinearLayout>

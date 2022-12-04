@@ -37,7 +37,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_genre"
         android:layout_width="match_parent"
-        tools:listitem="@layout/movie"
         android:layout_height="wrap_content"
         android:clipToPadding="false" />
 

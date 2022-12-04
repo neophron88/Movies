@@ -4,6 +4,5 @@ plugins {
 
 dependencies {
     compileOnly libs.viewBinding
-    implementation libs.lifecycle.runtime
     implementation libs.recyclerview
 }

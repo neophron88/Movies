@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rate_icon">rate icon</string>
+
+    <string name="no_connection">No Connection</string>
+    <string name="backend_fault">Server not responding</string>
+    <string name="unknown_conn_error">Unknown error</string>
+    <string name="refresh">refresh</string>
+
+</resources>

@@ -17,5 +17,5 @@ fun ItemsAdapter(vararg args: ItemDelegate<out Any>): ItemsAdapter {
 inline fun <reified I : Any> ItemDelegate(
     @LayoutRes layout: Int,
     diffUtil: DiffUtil.ItemCallback<I>,
-    noinline itemViewHolderProducer: ItemViewHolderProducer<I>
-): ItemDelegate<I> = ItemDelegate(I::class, layout, diffUtil, itemViewHolderProducer)
+    noinline VHProducer: ItemViewHolderProducer<I>
+): ItemDelegate<I> = ItemDelegate(I::class, layout, diffUtil, VHProducer)

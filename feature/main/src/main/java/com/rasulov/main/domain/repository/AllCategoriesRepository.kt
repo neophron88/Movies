@@ -1,19 +1,21 @@
 package com.rasulov.main.domain.repository
 
-import com.rasulov.shared.domain.models.Movie
-import com.rasulov.main.domain.entities.Genre
-import com.rasulov.main.domain.queries.GenreChanged
+import com.rasulov.feature.domain.base.Resource
+import com.rasulov.feature.domain.base.queries.BaseQuery
+import com.rasulov.feature.domain.shared.models.Movie
+import com.rasulov.main.domain.models.Genre
+import com.rasulov.main.domain.queries.GenreChangedQuery
+import com.rasulov.main.domain.queries.MoviesByGenreQuery
 import kotlinx.coroutines.flow.Flow
 
 interface AllCategoriesRepository {
 
-    fun getGenresFlow(): Flow<List<Genre>>
+    fun getGenresFlow(query: BaseQuery): Flow<Resource<List<Genre>>>
 
-    fun changeGenreSortBy(genre: GenreChanged)
+    suspend fun setGenreSettings(query: GenreChangedQuery)
 
-    suspend fun loadMoviesByGenre(genre: Genre):  Flow<List<Movie>>
+    fun loadMoviesByGenre(query: MoviesByGenreQuery): Flow<Resource<List<Movie>>>
 
-    suspend fun loadTopRatedMovies():  Flow<List<Movie>>
+    fun loadRecentlyMovies(): Flow<Resource<List<Movie>>>
 
-    suspend fun loadRecentlyMovies():  Flow<List<Movie>>
 }
