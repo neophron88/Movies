@@ -10,10 +10,10 @@ android {
 
 dependencies {
     implementation project(':core:theme')
-    implementation project(':core:common')
     implementation project(':core:library')
     implementation project(':core:network')
     implementation libs.recyclerview
-
+    implementation libs.fragment.ktx
+    implementation libs.glide
 
 }

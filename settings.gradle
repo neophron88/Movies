@@ -17,7 +17,6 @@ dependencyResolutionManagement {
 rootProject.name = "Movies"
 include ':app'
 include ':core:library'
-include ':core:common'
 include ':feature:main'
 include ':feature:search'
 include ':feature:my-activity'

@@ -1,16 +1,16 @@
 package com.rasulov.main.data.util.mapper
 
-import com.rasulov.database.all_categories_dao.models.GenreEntity
-import com.rasulov.database.all_categories_dao.models.GenreSettingsEntity
-import com.rasulov.database.all_categories_dao.tuples.GenreWithSettingsTuple
-import com.rasulov.database.all_categories_dao.tuples.InsertGenresTuple
-import com.rasulov.database.all_categories_dao.tuples.InsertMoviesByGenreTuple
+import com.rasulov.database.all_genres_dao.models.GenreEntity
+import com.rasulov.database.all_genres_dao.models.GenreSettingsEntity
+import com.rasulov.database.all_genres_dao.tuples.GenreWithSettingsTuple
+import com.rasulov.database.all_genres_dao.tuples.InsertGenresTuple
+import com.rasulov.database.all_genres_dao.tuples.InsertMoviesByGenreTuple
 import com.rasulov.database.common_models.MovieEntity
-import com.rasulov.feature.domain.shared.models.Movie
+import com.rasulov.feature.domain.Movie
 import com.rasulov.main.domain.enums.SortBy
 import com.rasulov.main.domain.models.Genre
 import com.rasulov.main.domain.queries.GenreChangedQuery
-import com.rasulov.network.all_categories_service.models.NetworkGenre
+import com.rasulov.network.all_genres_service.models.NetworkGenre
 import com.rasulov.network.common_models.NetworkMovie
 
 
@@ -57,7 +57,7 @@ private fun MovieEntity.toMovie() = Movie(
 
 fun List<GenreWithSettingsTuple>.toGenres() = this.map { it.toGenre() }
 
-fun GenreWithSettingsTuple.toGenre() = Genre(
+private fun GenreWithSettingsTuple.toGenre() = Genre(
     id = this.genre.id,
     name = this.genre.name,
     sortBy = this.settings?.sortBy?.let { SortBy.values()[it] } ?: SortBy.POPULARITY

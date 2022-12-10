@@ -2,8 +2,14 @@ plugins {
     id 'extended-android-library'
 }
 
+android{
+    buildTypes.each {
+        it.buildConfigField "String", "BEARER_TOKEN", bearer_token
+    }
+}
 dependencies {
     api libs.okhttp
     api libs.retrofit
     api libs.moshi
+    implementation libs.okhttp.logging.interceptor
 }

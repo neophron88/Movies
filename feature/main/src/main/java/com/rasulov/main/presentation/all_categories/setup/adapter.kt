@@ -2,28 +2,29 @@ package com.rasulov.main.presentation.all_categories.setup
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rasulov.common.ktx.primitives.dp
-import com.rasulov.feature.domain.shared.models.Movie
-import com.rasulov.feature.presentation.shared.viewholders.MovieHorizontalViewHolder
-import com.rasulov.feature.presentation.shared.viewholders.MovieVerticalViewHolder
+import androidx.recyclerview.widget.RecyclerView
+import com.rasulov.feature.domain.Movie
+import com.rasulov.feature.presentation.viewholders.MovieHorizontalViewHolder
+import com.rasulov.feature.presentation.viewholders.MovieVerticalViewHolder
+import com.rasulov.library.ktx.primitives.dp
+import com.rasulov.library.rv_adapter_delegate.ItemDelegate
+import com.rasulov.library.rv_adapter_delegate.ItemDiffUtil
+import com.rasulov.library.rv_adapter_delegate.ItemsAdapter
 import com.rasulov.main.R
 import com.rasulov.main.domain.models.Genre
 import com.rasulov.main.domain.models.Recently
 import com.rasulov.main.presentation.all_categories.AllCategoriesFragment
-import com.rasulov.main.presentation.all_categories.showErrorBarAndAddErrorTask
-import com.rasulov.main.presentation.all_categories.viewholder.GenreViewHolder
-import com.rasulov.main.presentation.all_categories.viewholder.RecentlyViewHolder
-import com.rasulov.ui.rv_adapter_delegate.ItemDelegate
-import com.rasulov.ui.rv_adapter_delegate.ItemDiffUtil
-import com.rasulov.ui.rv_adapter_delegate.ItemsAdapter
+import com.rasulov.main.presentation.all_categories.setup.viewholder.GenreViewHolder
+import com.rasulov.main.presentation.all_categories.setup.viewholder.RecentlyViewHolder
 
 
 internal fun AllCategoriesFragment.setupAdapter(): ItemsAdapter {
 
+    val viewPool = RecyclerView.RecycledViewPool()
     val genreDelegate = ItemDelegate(
         layout = R.layout.genre_item,
         diffUtil = ItemDiffUtil(itemsTheSameValue = Genre::id),
-        VHProducer = { createGenreViewHolder(it) },
+        VHProducer = { createGenreViewHolder(it, viewPool) },
     )
 
     val recentlyDelegate = ItemDelegate(
@@ -36,14 +37,17 @@ internal fun AllCategoriesFragment.setupAdapter(): ItemsAdapter {
 }
 
 
-private fun AllCategoriesFragment.createGenreViewHolder(view: View) = GenreViewHolder(
+private fun AllCategoriesFragment.createGenreViewHolder(
+    view: View,
+    viewPool: RecyclerView.RecycledViewPool
+) = GenreViewHolder(
     view = view,
     viewLifecycleOwner = viewLifecycleOwner,
     onLoadMovies = { viewModel.loadMoviesByGenre(it) },
-    onMoreMoviesClick = { navigateToCategoryScreen(it) },
+    onMoreMoviesClick = { navigateToGenreScreen(it) },
     onSortByChanged = { genreId, sortBy -> viewModel.changeGenreSortBy(genreId, sortBy) },
     onError = { errorType, errorTask -> showErrorBarAndAddErrorTask(errorType, errorTask) },
-    onClearError = { errorTasks.remove(it) },
+    onRemoveError = { errorTasks.remove(it) },
     movieViewPool = viewPool,
     movieVerticalItemDelegate = createVerticalMovieItemDelegate(),
     movieLayoutManager = LinearLayoutManager(

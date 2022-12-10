@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/allCategoriesFragment">
+
+    <fragment
+        android:id="@+id/allCategoriesFragment"
+        android:name="com.rasulov.main.presentation.all_categories.AllCategoriesFragment"
+        android:label="fragment_all_categories"
+        tools:layout="@layout/fragment_all_categories" >
+        <action
+            android:id="@+id/action_allCategoriesFragment_to_genreFragment"
+            app:destination="@id/genreFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/genreFragment"
+        android:name="com.rasulov.main.presentation.category.GenreFragment"
+        android:label="GenreFragment" />
+</navigation>

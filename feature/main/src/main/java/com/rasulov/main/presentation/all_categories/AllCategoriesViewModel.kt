@@ -2,15 +2,13 @@ package com.rasulov.main.presentation.all_categories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rasulov.common.CurrentLanguage
-import com.rasulov.common.StringResource
-import com.rasulov.feature.domain.base.Resource
-import com.rasulov.feature.domain.base.Success
-import com.rasulov.feature.domain.base.enums.Language
-import com.rasulov.feature.domain.base.map
-import com.rasulov.feature.domain.base.queries.BaseQuery
-import com.rasulov.feature.domain.shared.models.Movie
-import com.rasulov.feature.presentation.shared.asLanguage
+import com.rasulov.feature.domain.BaseQuery
+import com.rasulov.feature.domain.Movie
+import com.rasulov.feature.domain.Resource
+import com.rasulov.feature.domain.map
+import com.rasulov.feature.presentation.asLanguage
+import com.rasulov.feature.utils.CurrentLanguage
+import com.rasulov.feature.utils.StringResource
 import com.rasulov.main.R
 import com.rasulov.main.domain.enums.SortBy
 import com.rasulov.main.domain.models.Category
@@ -23,8 +21,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.launch
 
-class AllCategoriesViewModel(
+internal class AllCategoriesViewModel(
     private val stringRes: StringResource,
     private val language: CurrentLanguage,
     private val repository: AllCategoriesRepository
@@ -32,7 +31,7 @@ class AllCategoriesViewModel(
 
 
     val allCategoriesFlow = repository
-        .getGenresFlow(BaseQuery(Language.EN))
+        .getGenresFlow(BaseQuery(language.asLanguage()))
         .map { mapToCategoryList(it) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
@@ -43,10 +42,11 @@ class AllCategoriesViewModel(
         )
 
 
-    suspend fun changeGenreSortBy(genreId: Int, sortBy: SortBy) =
+    fun changeGenreSortBy(genreId: Int, sortBy: SortBy) = viewModelScope.launch {
         repository.setGenreSettings(
             GenreChangedQuery(genreId, sortBy)
         )
+    }
 
 
     fun loadRecentlyMovies(): Flow<Resource<List<Movie>>> =

@@ -1,10 +1,10 @@
 package com.rasulov.main.data
 
-import com.rasulov.database.all_categories_dao.AllCategoriesDao
-import com.rasulov.feature.domain.base.Resource
-import com.rasulov.feature.domain.base.queries.BaseQuery
-import com.rasulov.feature.domain.shared.models.Movie
-import com.rasulov.main.data.network_datasource.AllCategoriesNetworkDataSource
+import com.rasulov.feature.domain.BaseQuery
+import com.rasulov.feature.domain.Movie
+import com.rasulov.feature.domain.Resource
+import com.rasulov.main.data.sources.local.AllCategoriesLocalDataSource
+import com.rasulov.main.data.sources.network.AllCategoriesNetworkDataSource
 import com.rasulov.main.data.util.mapper.*
 import com.rasulov.main.data.util.offlineFirst
 import com.rasulov.main.domain.models.Genre
@@ -13,11 +13,12 @@ import com.rasulov.main.domain.queries.MoviesByGenreQuery
 import com.rasulov.main.domain.repository.AllCategoriesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 
 class OfflineFirstAllCategoriesRepository(
-    private val local: AllCategoriesDao,
+    private val local: AllCategoriesLocalDataSource,
     private val network: AllCategoriesNetworkDataSource,
     private val longLiveScope: CoroutineScope
 ) : AllCategoriesRepository {
@@ -63,8 +64,7 @@ class OfflineFirstAllCategoriesRepository(
         )
 
 
-    override fun loadRecentlyMovies(): Flow<Resource<List<Movie>>> =
-        TODO()
+    override fun loadRecentlyMovies(): Flow<Resource<List<Movie>>> = emptyFlow()
 
 
 }

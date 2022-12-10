@@ -1,9 +1,9 @@
 package com.rasulov.main.data.util
 
-import com.rasulov.feature.data.base.networkdatasource.BackendSideException
-import com.rasulov.feature.data.base.networkdatasource.ClientSideException
-import com.rasulov.feature.data.base.networkdatasource.ConnectionException
-import com.rasulov.feature.domain.base.*
+import com.rasulov.feature.data.network.BackendSideException
+import com.rasulov.feature.data.network.ClientSideException
+import com.rasulov.feature.data.network.ConnectionException
+import com.rasulov.feature.domain.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow

@@ -10,4 +10,6 @@
     <string name="more_movies">More movies</string>
     <string name="top_rated">Top rated</string>
     <string name="recently">Recently</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

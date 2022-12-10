@@ -1,8 +1,8 @@
 package com.rasulov.main.domain.repository
 
-import com.rasulov.feature.domain.base.Resource
-import com.rasulov.feature.domain.base.queries.BaseQuery
-import com.rasulov.feature.domain.shared.models.Movie
+import com.rasulov.feature.domain.BaseQuery
+import com.rasulov.feature.domain.Movie
+import com.rasulov.feature.domain.Resource
 import com.rasulov.main.domain.models.Genre
 import com.rasulov.main.domain.queries.GenreChangedQuery
 import com.rasulov.main.domain.queries.MoviesByGenreQuery

@@ -16,6 +16,13 @@ android {
 
 dependencies {
     implementation project(':core:theme')
+    implementation project(':core:database')
+    implementation project(':core:network')
+    implementation project(':core:feature')
+    implementation project(':feature:main')
+
+    implementation libs.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
 
 }
 

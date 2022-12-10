@@ -1,6 +1,5 @@
 plugins {
     id 'extended-android-library'
-    id 'kotlin-kapt'
 }
 
 android {
@@ -14,5 +13,6 @@ android {
 
 dependencies {
     implementation libs.room
+    implementation libs.room.ktx
     kapt libs.room.compiler
 }

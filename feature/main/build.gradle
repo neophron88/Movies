@@ -1,7 +1,9 @@
 plugins{
     id 'feature-android-library'
+    id 'org.jetbrains.kotlin.android'
 }
 
 dependencies {
     implementation libs.gson
+
 }
