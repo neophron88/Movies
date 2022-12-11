@@ -44,7 +44,7 @@ internal class NetworkModule {
     @Singleton
     internal fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3")
+            .baseUrl("https://api.themoviedb.org/3/")
             .client(getOkHttpClient())
             .addConverterFactory(MoshiConverterFactory.create(getMoshi()))
             .build()

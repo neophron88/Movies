@@ -20,10 +20,13 @@ class MovieHorizontalViewHolder(
 
 
     override fun onBind(item: Movie) = with(binding) {
-        Glide.with(binding.root)
-            .load("${imageUrl}${item.backdropPath}")
-            .into(poster)
+        item.backdropPath?.let {
+            Glide.with(binding.root)
+                .load("${imageUrlHorizontal}$it")
+                .into(poster)
+        }
         Unit
+
     }
 
 

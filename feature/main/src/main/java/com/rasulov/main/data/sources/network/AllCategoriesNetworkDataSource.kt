@@ -11,5 +11,7 @@ interface AllCategoriesNetworkDataSource {
 
     suspend fun loadMoviesByGenre(params: ByGenreNetworkParams): List<NetworkMovie>
 
+    suspend fun loadTopRated(params: BaseNetworkParams): List<NetworkMovie>
+
 
 }

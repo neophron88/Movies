@@ -4,7 +4,6 @@ import androidx.annotation.StringDef
 
 
 open class BaseNetworkParams(
-    val page: Int? = null,
     @Lang val language: String
 ) {
 

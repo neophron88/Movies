@@ -9,10 +9,10 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/poster"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:maxWidth="250dp"
+        android:minHeight="230dp"
         app:shapeAppearanceOverlay="@style/ImageRoundedSquare"
         tools:src="@drawable/test_image" />
 
@@ -25,7 +25,7 @@
         android:ellipsize="end"
         android:fontFamily="@font/impact"
         android:maxLines="1"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="normal"
         tools:text="Avengers" />
 
@@ -38,8 +38,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:contentDescription="@string/rate_icon"
             android:src="@drawable/ic_rate" />
 
@@ -50,7 +50,7 @@
             android:layout_marginStart="3dp"
             android:fontFamily="@font/impact"
             android:textColor="@color/yellow"
-            android:textSize="18sp"
+            android:textSize="14sp"
             tools:text="7.9" />
 
         <TextView
@@ -60,7 +60,7 @@
             android:layout_marginStart="7dp"
             android:fontFamily="@font/impact"
             android:textColor="@color/purple_500"
-            android:textSize="18sp"
+            android:textSize="14sp"
             tools:text="2024-07-19" />
 
     </LinearLayout>

@@ -5,10 +5,9 @@ import com.rasulov.feature.data.network.params.BaseNetworkParams
 
 class ByGenreNetworkParams(
     val genreId: Int,
-    page: Int,
     @Lang language: String,
     @SortBy val sortBy: String
-) : BaseNetworkParams(page, language) {
+) : BaseNetworkParams(language) {
 
 
     companion object {

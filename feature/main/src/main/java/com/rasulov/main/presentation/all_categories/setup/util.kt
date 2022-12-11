@@ -14,7 +14,7 @@ internal fun AllCategoriesFragment.showErrorBarAndAddErrorTask(
     task: Task
 ) {
     Snackbar
-        .make(requireView(), type.toString(requireContext()), Snackbar.LENGTH_LONG)
+        .make(requireView(), type.toString(requireContext()), Snackbar.LENGTH_INDEFINITE)
         .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_FADE)
         .setAction(requireContext().getString(R.string.refresh)) { errorTasks.executeTasks() }
         .show()

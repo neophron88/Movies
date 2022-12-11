@@ -12,7 +12,6 @@ fun Response<*>.parseCacheRelatedHeaders(): CacheHeader {
     val headers = headers()
     val maxAge = findMaxAge(headers["Cache-Control"])
     val eTag = headers["ETag"]
-    Log.d("it0088", "parseCacheRelatedHeaders: $maxAge")
     return CacheHeader(maxAge, eTag)
 }
 

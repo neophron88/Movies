@@ -2,6 +2,7 @@ package com.rasulov.feature.data.network.family_genre
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import com.rasulov.network.all_genres_service.models.NetworkGenre
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -18,7 +19,7 @@ class FamilyGenreInterceptor(
     private val notFamilyKeywords = listOf(
         "ужас", "horror",
         "музык", "music",
-        "мелодрам", "Romanc",
+        "мелодрам", "romanc",
     )
 
     private val familyKeyword = listOf("famil", "семейн")
@@ -44,8 +45,11 @@ class FamilyGenreInterceptor(
         withContext(dispatcherIO) {
             var id: Int? = null
             for (keyword in familyKeyword) {
-                val genre = genres.find { it.name.contains(keyword, true) }
+                val genre = genres.find {
+                    it.name.contains(keyword, true) }
+
                 id = genre?.id
+                if(id != null) break
             }
 
             if (id == null) error("List from network must contain family genre")
@@ -53,10 +57,10 @@ class FamilyGenreInterceptor(
             Unit
         }
 
-    suspend fun filterNotFamilyGenres(genres: List<NetworkGenre>): List<NetworkGenre> =
+    suspend fun filterFamilyGenres(genres: List<NetworkGenre>): List<NetworkGenre> =
         withContext(dispatcherIO) {
             val set = pref.getStringSet(NOT_FAMILY, null) ?: setOf()
-            genres.filter { set.contains(it.id.toString()) }
+            genres.filterNot { set.contains(it.id.toString()) }
         }
 
     suspend fun getFamilyGenreId(): Int =

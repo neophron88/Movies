@@ -6,9 +6,10 @@ import com.rasulov.feature.data.network.ConnectionException
 import com.rasulov.feature.domain.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -21,19 +22,20 @@ inline fun <I, R> offlineFirst(
     mutex: Mutex,
     longLiveScope: CoroutineScope,
     crossinline localDataFlow: () -> Flow<List<I>>,
-    crossinline syncWithRemote: suspend () -> List<R>,
+    crossinline syncWithNetwork: suspend () -> List<R>,
     crossinline updateLocalData: suspend (List<R>) -> Unit
-): Flow<Resource<List<I>>> = channelFlow {
+): Flow<Resource<List<I>>> = flow {
 
     val localData = localDataFlow()
-    send(Success(localData.first()))
+    emit(Success(localData.first()))
+
 
     val syncResult = longLiveScope.async {
         mutex.withLock {
             try {
-                val remoteDataList = syncWithRemote()
-                if (remoteDataList.isNotEmpty())
-                    updateLocalData(remoteDataList)
+                val networkDataList = syncWithNetwork()
+                if (networkDataList.isNotEmpty())
+                    updateLocalData(networkDataList)
                 SyncSuccess
             } catch (e: ConnectionException) {
                 SyncFault(NoConnection)
@@ -46,9 +48,9 @@ inline fun <I, R> offlineFirst(
 
     }.await()
 
-    if (syncResult is SyncFault) send(Error(syncResult.type))
+    if (syncResult is SyncFault) emit(Error(syncResult.type))
 
-    localData.collect { send(Success(it)) }
+    localData.collect { emit(Success(it)) }
 }
 
 

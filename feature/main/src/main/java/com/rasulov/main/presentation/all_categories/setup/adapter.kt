@@ -64,7 +64,7 @@ private fun AllCategoriesFragment.createVerticalMovieItemDelegate() = ItemDelega
     VHProducer = {
         MovieVerticalViewHolder(
             view = it,
-            posterWidth = 150.dp(requireContext()),
+            posterWidth = 130.dp(requireContext()),
             onMovieClick = { movieId -> navigateToMovieDetailScreen(movieId) }
         )
     }

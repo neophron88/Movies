@@ -2,15 +2,15 @@ package com.rasulov.network.common_models
 
 import com.squareup.moshi.Json
 
- class NetworkMovie(
+class NetworkMovie(
     val id: Int,
     val title: String,
-    @Json(name = "poster_path")
-    val posterPath: String,
-    @Json(name = "backdrop_path")
-    val backdropPath: String,
-    @Json(name = "release_date")
+    @field:Json(name = "poster_path")
+    val posterPath: String?,
+    @field:Json(name = "backdrop_path")
+    val backdropPath: String?,
+    @field:Json(name = "release_date")
     val releaseDate: String,
-    @Json(name = "vote_average")
+    @field:Json(name = "vote_average")
     val rating: Float
 )

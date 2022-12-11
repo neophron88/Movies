@@ -2,7 +2,6 @@ package com.rasulov.feature.presentation.viewholders
 
 import android.view.View
 import com.bumptech.glide.Glide
-import com.rasulov.feature.R
 import com.rasulov.feature.databinding.VerticalMovieBinding
 import com.rasulov.feature.domain.Movie
 import com.rasulov.library.ktx.primitives.Dp
@@ -26,12 +25,12 @@ class MovieVerticalViewHolder(
 
 
     override fun onBind(item: Movie) = with(binding) {
+        item.posterPath?.let {
+            Glide.with(binding.root)
+                .load("${imageUrl}$it")
+                .into(poster)
+        }
 
-        Glide.with(binding.root)
-            .load("${imageUrl}${item.posterPath}")
-            .into(poster)
-
-        poster.setImageResource(R.drawable.test_image)
         title.text = item.title
         releaseDate.text = item.releaseDate
         rating.text = item.rating

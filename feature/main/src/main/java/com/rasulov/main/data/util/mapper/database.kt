@@ -28,8 +28,9 @@ fun List<NetworkMovie>.toInsertMoviesByGenreTuple(genreId: Int) = InsertMoviesBy
     movies = this.map { it.toMovieEntity(genreId) }
 )
 
-private fun NetworkMovie.toMovieEntity(genreId: Int? = null) = MovieEntity(
-    id = this.id,
+private fun NetworkMovie.toMovieEntity(genreId: Int) = MovieEntity(
+    id = 0,
+    movieId = this.id,
     genreId = genreId,
     title = this.title,
     posterPath = this.posterPath,

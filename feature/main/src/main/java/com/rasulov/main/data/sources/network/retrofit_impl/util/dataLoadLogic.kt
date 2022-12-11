@@ -1,5 +1,6 @@
 package com.rasulov.main.data.sources.network.retrofit_impl.util
 
+import android.util.Log
 import com.rasulov.feature.data.network.ConnectionException
 import com.rasulov.feature.data.network.CacheHeader
 import com.rasulov.feature.data.network.NOT_MODIFIED
@@ -36,7 +37,7 @@ inline fun <T> revalidate(
         val cacheHeader = response.parseCacheRelatedHeaders()
         updateCacheInfo(cacheHeader)
         response.body() ?: ifNotOutDated()
-    } else throw parseHttpCodeToException(code)
+    } else throw parseHttpCodeToException(code, Throwable("Http response exception"))
 
     result
 

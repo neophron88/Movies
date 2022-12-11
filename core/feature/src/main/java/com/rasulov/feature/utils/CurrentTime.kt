@@ -13,7 +13,7 @@ internal class CurrentTimeImpl : CurrentTime {
         System.currentTimeMillis()
 
     override fun getTimeInSeconds(): Long =
-        System.currentTimeMillis() / 1000L
+        getTimeInMillis() / 1000L
 
 
 }

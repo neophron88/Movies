@@ -1,6 +1,6 @@
 package com.rasulov.network.all_genres_service
 
-import com.rasulov.network.all_genres_service.models.NetworkGenre
+import com.rasulov.network.all_genres_service.models.AllNetworkGenres
 import com.rasulov.network.common_models.NetworkMovieList
 import retrofit2.Response
 import retrofit2.http.GET
@@ -12,15 +12,20 @@ interface AllGenresService {
     @GET("genre/movie/list")
     suspend fun loadAllGenres(
         @Header("If-None-Match") eTag: String?,
-        @QueryMap params: Map<String, String>
-    ): Response<List<NetworkGenre>>
+        @QueryMap params: Map<String, @JvmSuppressWildcards Any>
+    ): Response<AllNetworkGenres>
 
 
     @GET("discover/movie")
     suspend fun loadMoviesByGenre(
         @Header("If-None-Match") eTag: String?,
-        @QueryMap params: Map<String, Any?>,
+        @QueryMap params: Map<String, @JvmSuppressWildcards Any>,
     ): Response<NetworkMovieList>
 
+    @GET("movie/top_rated")
+    suspend fun loadTopRated(
+        @Header("If-None-Match") eTag: String?,
+        @QueryMap params: Map<String, @JvmSuppressWildcards Any>
+    ): Response<NetworkMovieList>
 
 }

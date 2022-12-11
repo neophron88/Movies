@@ -8,15 +8,13 @@ import com.rasulov.main.domain.enums.SortBy
 import com.rasulov.main.domain.queries.MoviesByGenreQuery
 
 
-fun BaseQuery.toBaseParams(page: Int? = null): BaseNetworkParams = BaseNetworkParams(
+fun BaseQuery.toBaseParams(): BaseNetworkParams = BaseNetworkParams(
     language = defineLanguage(language),
-    page = page
 )
 
 
 fun MoviesByGenreQuery.toByGenreNetworkParams(page: Int) = ByGenreNetworkParams(
     genreId = this.genreId,
-    page = page,
     language = defineLanguage(language),
     sortBy = defineSortBy(sortBy)
 )

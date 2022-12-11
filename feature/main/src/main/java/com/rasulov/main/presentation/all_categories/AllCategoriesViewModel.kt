@@ -18,9 +18,7 @@ import com.rasulov.main.domain.queries.GenreChangedQuery
 import com.rasulov.main.domain.queries.MoviesByGenreQuery
 import com.rasulov.main.domain.repository.AllCategoriesRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 
 internal class AllCategoriesViewModel(
@@ -30,10 +28,9 @@ internal class AllCategoriesViewModel(
 ) : ViewModel() {
 
 
-    val allCategoriesFlow = repository
+    fun allCategoriesFlow() = repository
         .getGenresFlow(BaseQuery(language.asLanguage()))
         .map { mapToCategoryList(it) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
     fun loadMoviesByGenre(genre: Genre): Flow<Resource<List<Movie>>> =
@@ -53,7 +50,7 @@ internal class AllCategoriesViewModel(
         repository.loadRecentlyMovies()
 
 
-    private fun mapToCategoryList(resource: Resource<List<Genre>>) =
+    private fun mapToCategoryList(resource: Resource<List<Genre>>): Resource<List<Category>> =
         resource.map {
             mutableListOf<Category>().apply {
                 add(Recently(stringRes.getString(R.string.recently)))
