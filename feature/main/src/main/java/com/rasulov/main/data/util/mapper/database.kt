@@ -7,11 +7,13 @@ import com.rasulov.database.all_genres_dao.tuples.InsertGenresTuple
 import com.rasulov.database.all_genres_dao.tuples.InsertMoviesByGenreTuple
 import com.rasulov.database.common_models.MovieEntity
 import com.rasulov.feature.domain.Movie
+import com.rasulov.feature.utils.changeDateFormat
 import com.rasulov.main.domain.enums.SortBy
 import com.rasulov.main.domain.models.Genre
 import com.rasulov.main.domain.queries.GenreChangedQuery
 import com.rasulov.network.all_genres_service.models.NetworkGenre
 import com.rasulov.network.common_models.NetworkMovie
+import java.util.*
 
 
 fun List<NetworkGenre>.toInsertGenresTuple() = InsertGenresTuple(
@@ -19,9 +21,16 @@ fun List<NetworkGenre>.toInsertGenresTuple() = InsertGenresTuple(
 )
 
 private fun NetworkGenre.toGenreEntity() = GenreEntity(
-    id = this.id,
-    name = this.name
+    id = id,
+    name = name.firstToUpperCase()
 )
+
+private fun String.firstToUpperCase(): String {
+    if (length == 0) return this
+    val first = this[0]
+    val other = this.substring(1)
+    return first.uppercase() + other
+}
 
 fun List<NetworkMovie>.toInsertMoviesByGenreTuple(genreId: Int) = InsertMoviesByGenreTuple(
     genreId = genreId,
@@ -35,7 +44,7 @@ private fun NetworkMovie.toMovieEntity(genreId: Int) = MovieEntity(
     title = this.title,
     posterPath = this.posterPath,
     backdropPath = this.backdropPath,
-    releaseDate = this.releaseDate,
+    releaseDate = this.releaseDate.changeDateFormat("yyyy-MM-dd","MMM d, yyyy"),
     rating = this.rating
 )
 

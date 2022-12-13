@@ -1,5 +1,16 @@
-<vector android:height="24dp" android:tint="@color/black"
-    android:viewportHeight="24" android:viewportWidth="24"
-    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:fillColor="@android:color/white" android:pathData="M15,5l-1.41,1.41L18.17,11H2V13h16.17l-4.59,4.59L15,19l7,-7L15,5z"/>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <path
+        android:name="path"
+        android:pathData="M 16.75 7 L 25.75 16 L 16.75 25 M 24.5 16 L 6.25 16"
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"/>
 </vector>
+

@@ -7,4 +7,5 @@ internal fun AllCategoriesFragment.setupList(
 ) = with(binding.listAllCategories) {
     layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     adapter = itemsAdapter
+    itemAnimator = null
 }

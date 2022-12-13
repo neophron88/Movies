@@ -13,7 +13,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:fontFamily="@font/impact"
+        android:fontFamily="@font/opensans_semibold"
         android:maxLines="2"
         android:paddingVertical="10dp"
         android:textSize="20sp"

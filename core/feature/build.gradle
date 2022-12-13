@@ -15,5 +15,6 @@ dependencies {
     implementation libs.recyclerview
     implementation libs.fragment.ktx
     implementation libs.glide
+    kapt libs.glide.compiler
 
 }

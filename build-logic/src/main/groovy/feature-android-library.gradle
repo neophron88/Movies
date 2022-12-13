@@ -21,9 +21,15 @@ dependencies {
     implementation libs.fragment.ktx
     implementation libs.paging.library
     implementation libs.coroutines
+
     implementation libs.glide
+    kapt libs.glide.compiler
+
     implementation libs.navigation.fragment.ktx
     implementation libs.navigation.ui.ktx
+
+    implementation libs.shimmer
+
 
 
 }

@@ -13,7 +13,7 @@ class MoviesApp : Application(), DependencyProvider {
         CoroutineScope(SupervisorJob() + Dispatchers.IO)
     }
 
-    override val dependency by lazy {
+    override val dependency: Any by lazy {
         DaggerMoviesAppComponent
             .factory()
             .create(applicationScope, this)

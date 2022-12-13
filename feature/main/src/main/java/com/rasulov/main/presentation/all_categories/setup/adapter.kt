@@ -14,6 +14,7 @@ import com.rasulov.main.R
 import com.rasulov.main.domain.models.Genre
 import com.rasulov.main.domain.models.Recently
 import com.rasulov.main.presentation.all_categories.AllCategoriesFragment
+import com.rasulov.main.presentation.all_categories.setup.spinner_adapter.SpinnerSortByAdapter
 import com.rasulov.main.presentation.all_categories.setup.viewholder.GenreViewHolder
 import com.rasulov.main.presentation.all_categories.setup.viewholder.RecentlyViewHolder
 
@@ -21,6 +22,7 @@ import com.rasulov.main.presentation.all_categories.setup.viewholder.RecentlyVie
 internal fun AllCategoriesFragment.setupAdapter(): ItemsAdapter {
 
     val viewPool = RecyclerView.RecycledViewPool()
+
     val genreDelegate = ItemDelegate(
         layout = R.layout.genre_item,
         diffUtil = ItemDiffUtil(itemsTheSameValue = Genre::id),
@@ -54,7 +56,8 @@ private fun AllCategoriesFragment.createGenreViewHolder(
         requireContext(),
         LinearLayoutManager.HORIZONTAL,
         false
-    )
+    ),
+    spinnerSortByAdapter = SpinnerSortByAdapter(requireContext())
 )
 
 

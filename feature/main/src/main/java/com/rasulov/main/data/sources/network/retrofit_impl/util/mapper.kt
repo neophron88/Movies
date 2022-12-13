@@ -14,7 +14,7 @@ import com.rasulov.main.data.sources.network.retrofit_impl.params.DefaultParams
 fun CacheHeader.toAllGenresCache(params: BaseNetworkParams, currentTime: CurrentTime) =
     AllGenresCache(
         language = params.language,
-        maxAge = 10,
+        maxAge = maxAge,
         eTag = eTag,
         defaultMaxAgeIfOtherNull = CacheInfo.DEFAULT_MAX_AGE,
         updatedTimeInSeconds = currentTime.getTimeInSeconds()
@@ -25,7 +25,7 @@ fun CacheHeader.toGenreCache(params: ByGenreNetworkParams, currentTime: CurrentT
         language = params.language,
         sortBy = params.sortBy,
         genreId = params.genreId,
-        maxAge = 10,
+        maxAge = maxAge,
         eTag = eTag,
         defaultMaxAgeIfOtherNull = CacheInfo.DEFAULT_MAX_AGE,
         updatedTimeInSeconds = currentTime.getTimeInSeconds()
@@ -44,7 +44,7 @@ suspend fun ByGenreNetworkParams.toQueryMap(genre: FamilyGenreInterceptor): Map<
         ByGenreNetworkParams.SORT_BY_KEY to sortBy,
         ByGenreNetworkParams.WITH_GENRES_KEY to "${genreId}, ${genre.getFamilyGenreId()}",
         ByGenreNetworkParams.WITHOUT_GENRES_KEY to genre.getNotFamilyGenreIdsAsString(),
-        DefaultParams.VOTE_COUNT_GTE_500
+        DefaultParams.VOTE_COUNT_GTE_300
     )
 
 

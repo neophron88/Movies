@@ -1,6 +1,8 @@
 package com.rasulov.main.presentation.all_categories.setup.viewholder
 
 import android.view.View
+import android.widget.BaseAdapter
+import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.rasulov.feature.domain.*
@@ -31,6 +33,7 @@ class GenreViewHolder(
     private val movieViewPool: RecyclerView.RecycledViewPool,
     movieVerticalItemDelegate: ItemDelegate<Movie>,
     private val movieLayoutManager: RecyclerView.LayoutManager,
+    private val spinnerSortByAdapter: BaseAdapter
 ) : SafeItemViewHolder<Genre>(view, viewLifecycleOwner) {
 
     private val binding = GenreItemBinding.bind(view)
@@ -43,7 +46,7 @@ class GenreViewHolder(
 
     init {
         setUpClickListeners()
-        setupList()
+        setupViews()
     }
 
 
@@ -58,15 +61,30 @@ class GenreViewHolder(
     override fun unBind() {
         super.unBind()
         onRemoveError(onErrorTask)
+        moviesAdapter.submitList(emptyList())
     }
 
 
     private fun loadMovies(item: Genre) = viewHolderScope.safeLaunch {
         onLoadMovies(item).collect {
             when (it) {
-                is Loading -> Unit
-                is Success -> moviesAdapter.submitList(it.value)
-                is Error -> onError(it.type, onErrorTask)
+                is Loading -> {
+                    binding.shimmerLayout.shimmerGenre.startShimmer()
+                    binding.shimmerLayout.shimmerGenre.isVisible = true
+                    binding.listGenre.isVisible = false
+
+                }
+                is Success -> {
+                    moviesAdapter.submitList(it.value)
+
+                    binding.shimmerLayout.shimmerGenre.stopShimmer()
+                    binding.shimmerLayout.shimmerGenre.isVisible = false
+                    binding.listGenre.isVisible = true
+
+                }
+                is Error -> {
+                    onError(it.type, onErrorTask)
+                }
             }
         }
     }
@@ -74,15 +92,23 @@ class GenreViewHolder(
 
     private fun setUpClickListeners() = with(binding) {
         spinnerSortBy.setOnItemSelectedListener { _, position ->
-            onSortByChanged(item.id, SortBy.values()[position])
+            val selectedSortBy = SortBy.values()[position]
+            if (item.sortBy != selectedSortBy) onSortByChanged(item.id, selectedSortBy)
         }
         morePointer.setOnClickListener { onMoreMoviesClick(item.id) }
     }
 
-    private fun setupList() = with(binding.listGenre) {
-        adapter = moviesAdapter
-        layoutManager = movieLayoutManager
-        setRecycledViewPool(movieViewPool)
+    private fun setupViews() {
+        with(binding.listGenre) {
+            adapter = moviesAdapter
+            itemAnimator = null
+            layoutManager = movieLayoutManager
+            setRecycledViewPool(movieViewPool)
+        }
+
+        with(binding.spinnerSortBy) {
+            adapter = spinnerSortByAdapter
+        }
     }
 
 }

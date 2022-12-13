@@ -1,5 +1,6 @@
 package com.rasulov.main.data.util
 
+import android.util.Log
 import com.rasulov.feature.data.network.BackendSideException
 import com.rasulov.feature.data.network.ClientSideException
 import com.rasulov.feature.data.network.ConnectionException
@@ -19,6 +20,7 @@ class SyncFault(val type: ErrorType) : SyncResult()
 
 
 inline fun <I, R> offlineFirst(
+    str: String,
     mutex: Mutex,
     longLiveScope: CoroutineScope,
     crossinline localDataFlow: () -> Flow<List<I>>,
@@ -27,8 +29,7 @@ inline fun <I, R> offlineFirst(
 ): Flow<Resource<List<I>>> = flow {
 
     val localData = localDataFlow()
-    emit(Success(localData.first()))
-
+    emit(Loading())
 
     val syncResult = longLiveScope.async {
         mutex.withLock {

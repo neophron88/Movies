@@ -1,7 +1,7 @@
 <resources>
 
     <string-array name="sort_by">
-        <item>Popularity</item>
+        <item>Popular</item>
         <item>Release date</item>
         <item>Revenue</item>
         <item>Rating</item>

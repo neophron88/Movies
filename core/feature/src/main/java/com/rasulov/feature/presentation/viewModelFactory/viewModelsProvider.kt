@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 
 inline fun <reified VM : ViewModel> Fragment.viewModelsProvider(): Lazy<VM> =
     viewModels(
-        factoryProducer = { getViewModelFactory() }
+        factoryProducer = { getViewModelFactoryFromParent() }
     )
 
 
-fun Fragment.getViewModelFactory(): ViewModelFactory {
+fun Fragment.getViewModelFactoryFromParent(): ViewModelFactory {
     var hasViewModelFactory: HasViewModelFactory? = null
 
     var parent: Fragment? = parentFragment

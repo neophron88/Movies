@@ -23,6 +23,7 @@ roomKtxVersion = "2.4.0-rc01"
 glideVersion = "4.14.2"
 daggerVersion = "2.44"
 navVersion = "2.5.3"
+shimmerVersion = "0.5.0"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
@@ -59,6 +60,7 @@ dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = 
 
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navVersion" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navVersion" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmerVersion" }
 
 
 [plugins]

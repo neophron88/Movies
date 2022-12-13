@@ -33,6 +33,7 @@ class OfflineFirstAllCategoriesRepository(
 
     override fun getGenresFlow(query: BaseQuery): Flow<Resource<List<Genre>>> =
         offlineFirst(
+            str = "iya",
             mutex = mutex,
             longLiveScope = longLiveScope,
             localDataFlow = { local.getGenresFlow().map { it.toGenres() } },
@@ -50,6 +51,7 @@ class OfflineFirstAllCategoriesRepository(
 
     override fun loadMoviesByGenre(query: MoviesByGenreQuery): Flow<Resource<List<Movie>>> =
         offlineFirst(
+            str = query.genreId.toString(),
             mutex = mutex,
             longLiveScope = longLiveScope,
             localDataFlow = {
@@ -68,18 +70,24 @@ class OfflineFirstAllCategoriesRepository(
 
     override fun loadRecentlyMovies(): Flow<Resource<List<Movie>>> =
         flow {
-            val value = network.loadTopRated(
-                BaseNetworkParams(language = BaseNetworkParams.EN)
-            ).map {
-                Movie(
-                    it.id,
-                    it.posterPath,
-                    it.backdropPath,
-                    it.title,
-                    it.releaseDate,
-                    it.rating.toString()
-                )
+            val value = try {
+                network.loadTopRated(
+                    BaseNetworkParams(language = BaseNetworkParams.EN)
+                ).map {
+                    Movie(
+                        it.id,
+                        it.posterPath,
+                        it.backdropPath,
+                        it.title,
+                        it.releaseDate,
+                        it.rating.toString()
+                    )
+                }
+            } catch (e: Exception) {
+                emptyList()
             }
+
+
             emit(Success(value))
         }
 

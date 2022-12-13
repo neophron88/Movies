@@ -1,9 +1,13 @@
 package com.rasulov.feature.presentation.viewholders
 
+import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.rasulov.feature.R
 import com.rasulov.feature.databinding.VerticalMovieBinding
 import com.rasulov.feature.domain.Movie
+import com.rasulov.feature.presentation.glide.GlideApp
 import com.rasulov.library.ktx.primitives.Dp
 import com.rasulov.library.rv_adapter_delegate.ItemViewHolder
 
@@ -19,15 +23,16 @@ class MovieVerticalViewHolder(
     init {
         setupClickListeners()
         with(binding) {
-            poster.layoutParams = poster.layoutParams.apply { width = posterWidth }
         }
     }
 
 
     override fun onBind(item: Movie) = with(binding) {
         item.posterPath?.let {
-            Glide.with(binding.root)
+
+            GlideApp.with(binding.root)
                 .load("${imageUrl}$it")
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(poster)
         }
 
@@ -35,6 +40,11 @@ class MovieVerticalViewHolder(
         releaseDate.text = item.releaseDate
         rating.text = item.rating
 
+    }
+
+    override fun unBind() {
+        super.unBind()
+        binding.poster.setImageResource(android.R.color.transparent)
     }
 
 
