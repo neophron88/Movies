@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="400dp"
     android:layout_marginVertical="10dp"
     android:orientation="vertical">
 
@@ -28,14 +27,18 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="end"
+            android:clickable="true"
+            android:focusable="true"
             android:contentDescription="@string/more_movies"
             android:src="@drawable/ic_pointer_more" />
     </FrameLayout>
 
 
     <FrameLayout
+        android:id="@+id/movies_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:minHeight="250dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_genre"
@@ -46,7 +49,7 @@
 
         <include
             android:id="@+id/shimmer_layout"
-            layout="@layout/genre_shimmer" />
+            layout="@layout/shimmer_movies" />
 
     </FrameLayout>
 
@@ -59,8 +62,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
         android:dropDownWidth="200dp"
+        android:backgroundTint="?attr/colorOnPrimary"
         android:dropDownVerticalOffset="40dp"
-        android:entries="@array/sort_by"
-        android:popupBackground="@drawable/shimmer_item_bg" />
+        android:popupBackground="@drawable/blue500_with_corner_bg" />
 
 </LinearLayout>

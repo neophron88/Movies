@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
+    android:layout_marginStart="@dimen/poster_start_margin"
     android:orientation="vertical">
 
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="144dp"
-        android:layout_height="215dp"
+        android:layout_width="@dimen/poster_widthX1"
+        android:layout_height="@dimen/poster_heightX1"
         android:background="@color/blue_500"
         app:shapeAppearanceOverlay="@style/ImageRoundedSquare" />
 
@@ -18,14 +18,14 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:background="@drawable/shimmer_item_bg"
+        android:background="@drawable/blue500_with_corner_bg"
         android:textSize="16sp" />
 
     <TextView
         android:layout_width="144dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:background="@drawable/shimmer_item_bg"
+        android:background="@drawable/blue500_with_corner_bg"
         android:textSize="14sp" />
 
 </LinearLayout>

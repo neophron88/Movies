@@ -7,6 +7,16 @@
     android:orientation="vertical"
     tools:context=".MoviesActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="10dp"
+        android:theme="?attr/actionBarTheme"
+        app:title="@string/app_name"
+        app:titleTextAppearance="@style/toolbar_textappeareance" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/appFragmentContainer"
         android:name="androidx.navigation.fragment.NavHostFragment"

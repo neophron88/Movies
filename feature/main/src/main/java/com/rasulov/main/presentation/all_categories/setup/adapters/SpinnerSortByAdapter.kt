@@ -1,4 +1,4 @@
-package com.rasulov.main.presentation.all_categories.setup.spinner_adapter
+package com.rasulov.main.presentation.all_categories.setup.adapters
 
 import android.content.Context
 import android.graphics.Typeface
@@ -16,7 +16,7 @@ class SpinnerSortByAdapter(
 ) : BaseAdapter() {
 
     private val data = context.resources.getStringArray(R.array.sort_by)
-    private val font = ResourcesCompat.getFont(context, com.rasulov.feature.R.font.opensans_medium)
+    private val font = ResourcesCompat.getFont(context, com.rasulov.mylibrary.R.font.opensans_medium)
 
     private val inflate = LayoutInflater.from(context)
 

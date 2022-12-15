@@ -1,7 +1,6 @@
 package com.rasulov.main.presentation.all_categories
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.rasulov.feature.domain.Error
@@ -21,7 +20,6 @@ import com.rasulov.main.presentation.all_categories.setup.showErrorBarAndAddErro
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.*
 
 
 internal class AllCategoriesFragment : Fragment(R.layout.fragment_all_categories) {

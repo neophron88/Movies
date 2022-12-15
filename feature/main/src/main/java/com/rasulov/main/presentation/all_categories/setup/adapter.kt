@@ -14,7 +14,7 @@ import com.rasulov.main.R
 import com.rasulov.main.domain.models.Genre
 import com.rasulov.main.domain.models.Recently
 import com.rasulov.main.presentation.all_categories.AllCategoriesFragment
-import com.rasulov.main.presentation.all_categories.setup.spinner_adapter.SpinnerSortByAdapter
+import com.rasulov.main.presentation.all_categories.setup.adapters.SpinnerSortByAdapter
 import com.rasulov.main.presentation.all_categories.setup.viewholder.GenreViewHolder
 import com.rasulov.main.presentation.all_categories.setup.viewholder.RecentlyViewHolder
 
@@ -35,7 +35,9 @@ internal fun AllCategoriesFragment.setupAdapter(): ItemsAdapter {
         VHProducer = { createRecentlyViewHolder(it) },
     )
 
-    return ItemsAdapter(genreDelegate, recentlyDelegate)
+    return ItemsAdapter(genreDelegate, recentlyDelegate).also {
+        it.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+    }
 }
 
 
@@ -58,6 +60,7 @@ private fun AllCategoriesFragment.createGenreViewHolder(
         false
     ),
     spinnerSortByAdapter = SpinnerSortByAdapter(requireContext())
+
 )
 
 

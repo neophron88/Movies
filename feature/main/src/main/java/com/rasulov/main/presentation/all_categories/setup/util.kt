@@ -1,5 +1,7 @@
 package com.rasulov.main.presentation.all_categories.setup
 
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.rasulov.feature.R
@@ -13,6 +15,7 @@ internal fun AllCategoriesFragment.showErrorBarAndAddErrorTask(
     type: ErrorType,
     task: Task
 ) {
+
     Snackbar
         .make(requireView(), type.toString(requireContext()), Snackbar.LENGTH_INDEFINITE)
         .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_FADE)

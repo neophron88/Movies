@@ -2,7 +2,6 @@ package com.rasulov.main.presentation.all_categories.setup.viewholder
 
 import android.view.View
 import android.widget.BaseAdapter
-import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.rasulov.feature.domain.*
@@ -69,22 +68,20 @@ class GenreViewHolder(
         onLoadMovies(item).collect {
             when (it) {
                 is Loading -> {
-                    binding.shimmerLayout.shimmerGenre.startShimmer()
-                    binding.shimmerLayout.shimmerGenre.isVisible = true
-                    binding.listGenre.isVisible = false
+                    binding.shimmerLayout.shimmerMovies.startShimmer()
+                    binding.shimmerLayout.shimmerMovies.visibility = View.VISIBLE
+                    binding.listGenre.visibility = View.INVISIBLE
 
                 }
                 is Success -> {
                     moviesAdapter.submitList(it.value)
-
-                    binding.shimmerLayout.shimmerGenre.stopShimmer()
-                    binding.shimmerLayout.shimmerGenre.isVisible = false
-                    binding.listGenre.isVisible = true
-
+                    binding.shimmerLayout.shimmerMovies.stopShimmer()
+                    binding.shimmerLayout.shimmerMovies.visibility = View.INVISIBLE
+                    binding.listGenre.visibility = View.VISIBLE
                 }
-                is Error -> {
-                    onError(it.type, onErrorTask)
-                }
+
+                is Error -> onError(it.type, onErrorTask)
+
             }
         }
     }
@@ -93,9 +90,13 @@ class GenreViewHolder(
     private fun setUpClickListeners() = with(binding) {
         spinnerSortBy.setOnItemSelectedListener { _, position ->
             val selectedSortBy = SortBy.values()[position]
-            if (item.sortBy != selectedSortBy) onSortByChanged(item.id, selectedSortBy)
+            if (item.sortBy != selectedSortBy){
+                moviesAdapter.submitList(emptyList())
+                onSortByChanged(item.id, selectedSortBy)
+            }
         }
         morePointer.setOnClickListener { onMoreMoviesClick(item.id) }
+
     }
 
     private fun setupViews() {

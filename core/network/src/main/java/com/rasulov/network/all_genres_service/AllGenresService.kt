@@ -22,7 +22,8 @@ interface AllGenresService {
         @QueryMap params: Map<String, @JvmSuppressWildcards Any>,
     ): Response<NetworkMovieList>
 
-    @GET("movie/top_rated")
+
+    @GET("movie/popular")
     suspend fun loadTopRated(
         @Header("If-None-Match") eTag: String?,
         @QueryMap params: Map<String, @JvmSuppressWildcards Any>

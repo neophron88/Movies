@@ -1,9 +1,10 @@
 package com.rasulov.feature.presentation.viewholders
 
 import android.view.View
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.rasulov.feature.databinding.HorizontalMovieBinding
 import com.rasulov.feature.domain.Movie
+import com.rasulov.feature.presentation.glide.GlideApp
 import com.rasulov.library.rv_adapter_delegate.ItemViewHolder
 
 
@@ -21,9 +22,10 @@ class MovieHorizontalViewHolder(
 
     override fun onBind(item: Movie) = with(binding) {
         item.backdropPath?.let {
-            Glide.with(binding.root)
+            GlideApp.with(binding.root)
                 .load("${imageUrlHorizontal}$it")
-                .into(poster)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(horizontalPoster)
         }
         Unit
 

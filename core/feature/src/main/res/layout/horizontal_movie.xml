@@ -8,12 +8,12 @@
 
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/poster"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/horizontal_poster"
+        android:layout_width="320dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center"
         android:adjustViewBounds="true"
-        android:maxHeight="250dp"
+        android:background="@drawable/blue500_with_corner_bg"
         app:shapeAppearanceOverlay="@style/ImageRoundedSquare"
         tools:src="@drawable/test_image" />
 

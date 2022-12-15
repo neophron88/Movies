@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="poster_widthX1">144dp</dimen>
+    <dimen name="poster_heightX1">215dp</dimen>
+
+    <dimen name="poster_start_margin">10dp</dimen>
+</resources>
